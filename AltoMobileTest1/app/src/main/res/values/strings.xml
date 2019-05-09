@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AltoMobileTest1</string>
+   <!-- <string name="facebook_app_id">1194420124073023</string>-->
+    <string name="facebook_app_id">300558883661598</string>
+    <string name="fb_login_protocol_scheme">fb1194420124073023</string>
+    <!--<string name="facebook_app_id">300558883661598</string> -->
+    <string name="fb_login_button_text">Continue with facebook</string>
+    <string name="fb_logout_button_text">Logout </string>
+</resources>
