@@ -29,35 +29,21 @@ public class MainActivity extends AppCompatActivity {
         facebookButton = findViewById(R.id.facebookButton);
         callBack = CallbackManager.Factory.create();
 
+        if(isSessionActive()){
+            checkEmailPermission();
+        }
+
         LoginManager.getInstance().registerCallback(callBack,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        // logout
-                        if(isSessionActive() && facebookButton.getText().toString().compareToIgnoreCase("logout") == 0) {
-                            facebookButton.setText(R.string.fb_login_button_text); //change text of the facebook button
-                            LoginManager.getInstance().logOut();
-
-                        }else {
-                            //Check for email permission
-                            Set<String> declinedP = AccessToken.getCurrentAccessToken().getDeclinedPermissions();
-                            if(declinedP.contains("email")){
-                                Toast.makeText(MainActivity.this, "Email permission is mandatory", Toast.LENGTH_LONG).show();
-
-                            }else {
-                                //if everything is ok, then go to ListViewMenu
-                                facebookButton.setText(R.string.fb_logout_button_text);
-                                showListViewMenu();
-                            }
-                        }
+                        //Check for email permission
+                        checkEmailPermission();
                     }
 
                     @Override
                     public void onCancel() {
-                        Set<String> declinedP = AccessToken.getCurrentAccessToken().getDeclinedPermissions();
-                        if(declinedP.contains("email")){
-                            Toast.makeText(MainActivity.this, "Email permission is mandatory", Toast.LENGTH_LONG).show();
-                        }
+                        checkEmailPermission();
                     }
 
                     @Override
@@ -77,9 +63,21 @@ public class MainActivity extends AppCompatActivity {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
     }
 
-    private void showListViewMenu(){
+    private void openListViewMenu(){
         Intent i = new Intent(this, ListViewMenu.class);
         startActivity(i);
+    }
+
+    private boolean checkEmailPermission(){
+        Set<String> declinedP = AccessToken.getCurrentAccessToken().getDeclinedPermissions();
+        if(declinedP.contains("email")){
+            Toast.makeText(MainActivity.this, "Email permission is mandatory", Toast.LENGTH_LONG).show();
+            return false;
+        }else {
+            openListViewMenu();
+            finish();
+            return true;
+        }
     }
 
     private boolean isSessionActive(){
