@@ -59,27 +59,45 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * @param v Method to open facebook login
+     */
     public void facebookLogin(View v){
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
     }
 
+    /**
+     * Method to open ListViewMenu Activity once the user login with a Facebook account.
+     */
     private void openListViewMenu(){
         Intent i = new Intent(this, ListViewMenu.class);
         startActivity(i);
     }
 
+    /**
+     * Method to ensure user provided email permission
+     * @return boolean value to indicate if the user grant email permission
+     */
+
     private boolean checkEmailPermission(){
+        boolean hasEmailPermission = false;
         Set<String> declinedP = AccessToken.getCurrentAccessToken().getDeclinedPermissions();
+
         if(declinedP.contains("email")){
             Toast.makeText(MainActivity.this, "Email permission is mandatory", Toast.LENGTH_LONG).show();
-            return false;
+            hasEmailPermission = false;
         }else {
             openListViewMenu();
             finish();
-            return true;
+           hasEmailPermission = true;
         }
+        return hasEmailPermission;
     }
 
+    /**
+     * Method to check if there is an active facebook session
+     * @return boolean value to indicate if exist an active session
+     */
     private boolean isSessionActive(){
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null && !accessToken.isExpired();
