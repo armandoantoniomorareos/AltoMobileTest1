@@ -9,26 +9,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class RequestData extends AsyncTask<String, Void, String> {
 
-    private ListAdapter adapter;
-    private ArrayList<Animal> array;
+    private RestaurantListAdapter adapter;
+    private ListProducts listProducts;
+    private Gson gson;
 
     /**
-     * @param adapter,  ListAdapter to update with the data from json file
+     * @param adapter,  RestaurantListAdapter to update with the data from json file
      */
 
-    public RequestData(ListAdapter adapter) {
+    public RequestData(RestaurantListAdapter adapter) {
         this.adapter = adapter;
-        array = new ArrayList<>();
+       // array = new ArrayList<>();
+        gson = new Gson();
     }
 
     @Override
@@ -41,6 +47,7 @@ public class RequestData extends AsyncTask<String, Void, String> {
         try {
             try (Response response = client.newCall(request).execute()) {
                 tmpResponse = response.body().string();
+                Log.v("RequestData", "----->"+tmpResponse);
             }
         } catch (IOException e) {
         }
@@ -49,19 +56,22 @@ public class RequestData extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        try {
-            if (s != null && !s.equals("")) {
-                array = parserData(s);
-                for (Animal a : array) {  //create method to add to adapter
+        //try {
+        //Type t = new TypeToken<ArrayList<Product>>(){}.getType();
+        if (s != null && !s.equals("")) {
+            listProducts = gson.fromJson(s, ListProducts.class);
+            //array = parserData(s);
+            adapter.addAll(listProducts.products);
+                /*for (Animal a : array) {  //create method to add to adapter
                     adapter.add(a);
-                }
-            } else {
-                Toast.makeText(getApplicationContext(),
-                        "There was an error getting data from server", Toast.LENGTH_LONG).show();
-            }
-        } catch (JSONException e) {
-            Log.v("RequestData", "" + e.getMessage());
+                }*/
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "There was an error getting data from server", Toast.LENGTH_LONG).show();
         }
+       /* } catch (JSONException e) {
+            Log.v("RequestData", "" + e.getMessage());
+        }*/
     }
 
 

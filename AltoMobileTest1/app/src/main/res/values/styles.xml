@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionMenuTextColor">#ff7076</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="cartDisable">
+        <item name="android:background">#aaaaaa</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:enabled">false</item>
+    </style>
 </resources>

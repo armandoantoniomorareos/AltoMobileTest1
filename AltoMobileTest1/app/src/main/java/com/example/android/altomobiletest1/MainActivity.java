@@ -74,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void openRestaurantActivity(){
+        Intent i = new Intent(this, ListViewResturant.class);
+        startActivity(i);
+    }
+
     /**
      * Method to ensure user provided email permission
      * @return boolean value to indicate if the user grant email permission
@@ -87,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Email permission is mandatory", Toast.LENGTH_LONG).show();
             hasEmailPermission = false;
         }else {
-            openListViewMenu();
+            //openListViewMenu();
+            openRestaurantActivity();
             finish();
            hasEmailPermission = true;
         }

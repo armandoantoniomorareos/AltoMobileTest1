@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">AltoMobileTest1</string>
-   <!-- <string name="facebook_app_id">1194420124073023</string>-->
+    <string name="app_name">AltoMobile</string>
+    <!-- <string name="facebook_app_id">1194420124073023</string>-->
     <string name="facebook_app_id">300558883661598</string>
     <string name="fb_login_protocol_scheme">fb1194420124073023</string>
     <!--<string name="facebook_app_id">300558883661598</string> -->
     <string name="fb_login_button_text">Continue with facebook</string>
     <string name="fb_logout_button_text">Logout </string>
+    <string name="custom_dialog_message">If this app was real, you \nwould pay %1$.2f </string>
+    <string name="subproduct_msg">This product has sub-categories </string>
+    <string name="reset_button">Reset</string>
 </resources>

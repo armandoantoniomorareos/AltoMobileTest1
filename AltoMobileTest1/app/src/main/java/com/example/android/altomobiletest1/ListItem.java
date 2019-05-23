@@ -1,5 +1,8 @@
 package com.example.android.altomobiletest1;
 
+/*
+ * Class not needed
+ */
 public class ListItem {
 
     private String msg;

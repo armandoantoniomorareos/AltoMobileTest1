@@ -1,5 +1,7 @@
 package com.example.android.altomobiletest1;
-
+/*
+ *Class not needed
+ */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

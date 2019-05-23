@@ -1,5 +1,7 @@
 package com.example.android.altomobiletest1;
-
+/*
+ * class not needed
+ */
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ public class ListViewMenu extends AppCompatActivity {
     public ListView listView;
     public ListAdapter adapter;
     private static final String url = "https://flavioruben.herokuapp.com/data.json";
+    //private static final String urlProducts = "https://altomobile.blob.core.windows.net/training/menu.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class ListViewMenu extends AppCompatActivity {
             }
         });
 
-        new RequestData(adapter).execute(url);
+        //new RequestData(adapter).execute(url);
     }
+
+
 }
